@@ -1,0 +1,81 @@
+---
+---
+
+<div class="w-full max-w-6xl mx-auto px-4 absolute bottom-0 left-1/2 transform -translate-x-1/2 z-30 pb-12">
+    <div class="bg-rio-black/30 backdrop-blur-xl border border-white/10 rounded-none md:rounded-lg p-0 md:p-6 text-white shadow-2xl">
+        <form class="grid grid-cols-1 md:grid-cols-4 gap-0 md:gap-4 divide-y md:divide-y-0 divide-white/10 md:divide-x">
+            
+            <!-- Date Picker -->
+            <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0" id="date-selector">
+                <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Date</label>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm md:text-base font-serif" id="selected-date">Add date</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                
+                <!-- Custom Glassmorphic Date Popup -->
+                <div class="absolute bottom-full left-0 mb-4 w-72 bg-rio-black/80 backdrop-blur-xl border border-white/10 p-4 rounded-lg shadow-xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-2 group-focus-within:translate-y-0 z-50">
+                    <div class="text-center mb-4 font-serif">Select Details</div>
+                    <!-- Simplified visual representation of calendar for UI demo -->
+                    <input type="date" class="bg-white/10 border border-white/20 text-white rounded p-2 w-full outline-none focus:border-rio-red" onchange="document.getElementById('selected-date').innerText = this.value || 'Add date'">
+                </div>
+            </div>
+
+            <!-- Type Selector -->
+            <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0">
+                <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Type</label>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm md:text-base font-serif" id="selected-type">Apartment</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                <!-- Dropdown -->
+                <div class="absolute bottom-full left-0 mb-4 w-full bg-rio-black/80 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-2 group-focus-within:translate-y-0 z-50 overflow-hidden">
+                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-type').innerText = 'Apartment'">Apartment</button>
+                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-type').innerText = 'Deluxe Room'">Deluxe Room</button>
+                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-type').innerText = 'Villa'">Villa</button>
+                </div>
+            </div>
+
+            <!-- Guests Selector -->
+            <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0">
+                <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Guests</label>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm md:text-base font-serif" id="selected-guests">Number of guests</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                 <!-- Dropdown -->
+                 <div class="absolute bottom-full left-0 mb-4 w-full bg-rio-black/80 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-2 group-focus-within:translate-y-0 z-50 overflow-hidden">
+                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-guests').innerText = '1 Guest'">1 Guest</button>
+                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-guests').innerText = '2 Guests'">2 Guests</button>
+                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-guests').innerText = 'Family'">Family</button>
+                </div>
+            </div>
+
+            <!-- Booking Button -->
+            <div class="flex items-center justify-center p-4 md:p-2">
+                <a href="#book" class="group flex items-center gap-2 text-sm uppercase tracking-widest hover:text-rio-red transition-colors">
+                    Booking
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m16 8h-2" />
+                    </svg>
+                </a>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Hide native date picker icon if desired, or style it */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        opacity: 0.6;
+        cursor: pointer;
+    }
+</style>

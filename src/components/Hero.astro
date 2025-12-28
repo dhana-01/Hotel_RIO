@@ -1,21 +1,18 @@
 ---
 import { Image } from 'astro:assets';
+import BookingBar from './BookingBar.astro';
 // We are using the public image directly for background to ensure it covers nicely via CSS url or img element absolute
 ---
 
 <section class="relative h-screen flex items-center justify-center overflow-hidden">
   <!-- Background Image with Overlay -->
-  <div class="absolute inset-0 z-0">
-    <img 
-      src="/images/hero-bg.jpg" 
-      alt="Hotel Rio Habarana" 
-      class="w-full h-full object-cover"
-    />
+  <div class="absolute inset-0 z-0 w-full h-full">
+    <video src="/videos/hero_vid2.mp4" autoplay muted loop playsinline class="w-full h-full object-cover min-w-full min-h-full"></video>
     <div class="absolute inset-0 bg-black/40"></div>
   </div>
 
   <!-- Content -->
-  <div class="relative z-10 text-center text-white px-4 animate-fade-in-up">
+  <div class="relative z-10 text-center text-white px-4 animate-fade-in-up pb-32">
     <p class="font-sans text-sm md:text-base tracking-[0.2em] uppercase mb-4 text-rio-gray">
       Sri Lanka's Rich Heritage
     </p>
@@ -33,12 +30,7 @@ import { Image } from 'astro:assets';
     </div>
   </div>
 
-  <!-- Scroll Down Indicator -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-    </svg>
-  </div>
+  <BookingBar />
 </section>
 
 <style>
