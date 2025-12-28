@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+// We are using the public image directly for background to ensure it covers nicely via CSS url or img element absolute
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background Image with Overlay -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="/images/hero-bg.jpg" 
+      alt="Hotel Rio Habarana" 
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/40"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center text-white px-4 animate-fade-in-up">
+    <p class="font-sans text-sm md:text-base tracking-[0.2em] uppercase mb-4 text-rio-gray">
+      Sri Lanka's Rich Heritage
+    </p>
+    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl mb-6">
+      Hotel Rio
+    </h1>
+    <p class="font-serif italic text-xl md:text-2xl text-rio-white/90 mb-10 max-w-2xl mx-auto">
+      Experience the essence of Sri Lanka in the heart of the Cultural Triangle
+    </p>
+    
+    <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+        <a href="#rooms" class="px-8 py-3 border border-white text-white hover:bg-white hover:text-rio-black transition duration-300 font-sans tracking-widest uppercase text-sm">
+            Explore
+        </a>
+    </div>
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+    </svg>
+  </div>
+</section>
+
+<style>
+    .animate-fade-in-up {
+        animation: fadeInUp 1.2s ease-out forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

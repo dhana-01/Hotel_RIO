@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+// Placeholder images or use the hero image again if needed, or colored blocks for now.
+---
+
+<section id="about" class="py-20 md:py-32 bg-rio-white overflow-hidden">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center gap-16">
+      <!-- Text Content -->
+      <div class="w-full md:w-1/2">
+        <p class="text-rio-red font-sans uppercase tracking-[0.2em] text-sm mb-6">Discovery</p>
+        <h2 class="text-4xl md:text-5xl font-serif text-rio-black mb-8 leading-tight">
+          Beyond the hotel,<br/>
+          <span class="italic text-gray-500">Nature awaits</span>
+        </h2>
+        <p class="text-gray-600 font-sans leading-relaxed mb-6 font-light">
+          Nestled in the heart of the Cultural Triangle, Hotel Rio offers unobstructed views of Sigiriya and Pidurangala. 
+          Step into a world where modern luxury meets the authentic hospitality of Sri Lanka.
+        </p>
+        <p class="text-gray-600 font-sans leading-relaxed mb-10 font-light">
+           We bring you the essence of Sri Lanka through unique experiences, delicious food, and a deep connection to the wildlife that surrounds us.
+        </p>
+        
+        <a href="#location" class="group inline-flex items-center text-rio-black uppercase tracking-widest text-sm hover:text-rio-red transition-colors">
+          Explore the location
+          <span class="ml-2 transform group-hover:translate-x-2 transition-transform duration-300">→</span>
+        </a>
+      </div>
+
+      <!-- Visual Content -->
+      <div class="w-full md:w-1/2 relative bg-gray-200 aspect-[4/5] overflow-hidden">
+         <!-- Use a placeholder div or reuse hero bg for now as we don't have many images -->
+          <div class="absolute inset-0 bg-rio-gray flex items-center justify-center">
+             <span class="text-rio-black/20 font-serif text-4xl italic">Sigiriya View</span>
+          </div>
+          <!-- Ideally we'd have an image here e.g. /images/about.jpg -->
+          <img src="/images/sigiriya.jpg" alt="Sigiriya" class="object-cover w-full h-full opacity-90 hover:scale-105 transition-transform duration-700" />
+      </div>
+    </div>
+  </div>
+</section>

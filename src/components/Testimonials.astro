@@ -1,0 +1,41 @@
+---
+const reviews = [
+  {
+    name: "Sarah Jenkins",
+    location: "United Kingdom",
+    text: "An unforgettable stay. The views of Sigiriya were mesmerizing, and the staff treated us like royalty."
+  },
+  {
+    name: "David & Michelle",
+    location: "Australia",
+    text: "The perfect blend of luxury and nature. Waking up to the sounds of the jungle was a highlight of our trip."
+  },
+  {
+    name: "Hiroshi田中",
+    location: "Japan",
+    text: "Excellent food and beautiful rooms. Highly recommended for anyone visiting the Cultural Triangle."
+  }
+];
+---
+
+<section id="testimonials" class="py-24 bg-rio-black text-white relative overflow-hidden">
+  <div class="container mx-auto px-6 text-center z-10 relative">
+    <p class="text-rio-red font-sans uppercase tracking-[0.2em] text-sm mb-6">Guest Stories</p>
+    <h2 class="text-3xl md:text-5xl font-serif mb-16 italic">"Moments that last a lifetime"</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        {reviews.map((review) => (
+            <div class="bg-white/5 p-8 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition duration-500">
+                <div class="text-rio-red text-4xl font-serif mb-6 leading-none">“</div>
+                <p class="font-sans font-light text-gray-300 leading-relaxed mb-8 min-h-[80px]">
+                    {review.text}
+                </p>
+                <div>
+                    <h4 class="font-serif text-lg tracking-wide">{review.name}</h4>
+                    <span class="text-xs uppercase tracking-widest text-gray-500">{review.location}</span>
+                </div>
+            </div>
+        ))}
+    </div>
+  </div>
+</section>
