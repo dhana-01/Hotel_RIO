@@ -2,8 +2,6 @@
 
 A luxury hotel website built with **Astro 5**, **Tailwind CSS**, and **GSAP**, featuring a premium design inspired by the rich heritage of Sri Lanka's Cultural Triangle.
 
-![Hotel Rio Banner](/public/images/room1.png)
-
 ## 🌟 Features
 
 *   **Modern Tech Stack**: Built on Astro 5.x for lightning-fast performance (Static Site Generation).
