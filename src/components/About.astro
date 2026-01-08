@@ -28,14 +28,89 @@ import { Image } from 'astro:assets';
       </div>
 
       <!-- Visual Content -->
-      <div class="w-full md:w-1/2 relative bg-gray-200 aspect-[4/5] overflow-hidden">
-         <!-- Use a placeholder div or reuse hero bg for now as we don't have many images -->
-          <div class="absolute inset-0 bg-rio-gray flex items-center justify-center">
+      <div class="w-[600px] h-[600px] flex-none relative bg-gray-200 overflow-hidden shadow-xl rounded-lg group" id="about-image-container">
+          <!-- Text Overlay (Persist underneath or on top? Keeping underneath as per original design, but images need to sit on top of bg) -->
+          <div class="absolute inset-0 bg-rio-gray flex items-center justify-center -z-10">
              <span class="text-rio-black/20 font-serif text-4xl italic">Sigiriya View</span>
           </div>
-          <!-- Ideally we'd have an image here e.g. /images/about.jpg -->
-          <img src="/images/sigiriya.jpg" alt="Sigiriya" class="object-cover w-full h-full opacity-90 hover:scale-105 transition-transform duration-700" />
+
+          <!-- Slideshow Images -->
+          <div class="absolute inset-0 w-full h-full" id="slideshow-wrapper">
+              <img src="/images/sigiriya.jpg" alt="Sigiriya" class="slide-img absolute inset-0 w-full h-full object-cover z-10" />
+              <img src="/images/about1.jpg" alt="Hotel Interior" class="slide-img absolute inset-0 w-full h-full object-cover z-0" />
+              <img src="/images/about2.jpg" alt="Scenic View" class="slide-img absolute inset-0 w-full h-full object-cover z-0" />
+              <img src="/images/about3.jpg" alt="Dining" class="slide-img absolute inset-0 w-full h-full object-cover z-0" />
+              <img src="/images/about4.jpg" alt="Dining" class="slide-img absolute inset-0 w-full h-full object-cover z-0" />
+              <img src="/images/about5.jpg" alt="Dining" class="slide-img absolute inset-0 w-full h-full object-cover z-0" />
+          </div>
+
+          <!-- Wipe Line -->
+          <div id="wipe-line" class="absolute top-0 bottom-0 left-0 w-1 bg-white z-50 opacity-0 pointer-events-none"></div>
       </div>
+
+<script>
+  import { gsap } from "gsap";
+  
+  const images = document.querySelectorAll('.slide-img');
+  const wipeLine = document.getElementById('wipe-line');
+  let currentIndex = 0;
+  const slideInterval = 2000; // 2 seconds
+
+  // Initialize: Set all images hidden/back except first
+  // Actually, standard CSS stacking (last in DOM is top) or z-index?
+  // Let's control via z-index in GSAP
+  
+  if (images.length > 0 && wipeLine) {
+      // Ensure z-indices are correct
+      gsap.set(images, { zIndex: 0, opacity: 1 }); // specific opacity logic if needed, but we rely on z-index + clip
+      gsap.set(images[0], { zIndex: 10 });
+
+      const cycleImages = () => {
+          const nextIndex = (currentIndex + 1) % images.length;
+          const currentImg = images[currentIndex];
+          const nextImg = images[nextIndex];
+
+          // Bring next image to just below current (or above?)
+          // For a wipe REVEAL from RIGHT, we start fully clipped from the LEFT
+          gsap.set(nextImg, { zIndex: 20, clipPath: "inset(0 0 0 100%)" });
+          
+          // Animate Line and Clip Path
+          const tl = gsap.timeline({
+            onComplete: () => {
+                // Reset states
+                gsap.set(currentImg, { zIndex: 0 });
+                gsap.set(nextImg, { zIndex: 10 }); // Stays as current
+                currentIndex = nextIndex;
+            }
+          });
+
+          // Show line at Right side
+          tl.set(wipeLine, { opacity: 1, left: "100%" })
+            
+            // Simultaneous wipe: Line moves R->L, Next Image unmasks R->L
+            .to(wipeLine, { 
+                left: "0%", 
+                duration: 1, 
+                ease: "power2.inOut" 
+            }, 0)
+            .to(nextImg, { 
+                clipPath: "inset(0 0 0 0%)", 
+                duration: 1, 
+                ease: "power2.inOut" 
+            }, 0)
+            
+            // Hide line
+            .set(wipeLine, { opacity: 0 });
+
+      };
+
+      // Start loop
+      setInterval(() => {
+          // Check if tab is active logic could be added, but simple interval is fine
+          cycleImages();
+      }, slideInterval + 1000); // Wait for animation (1s) + interval
+  }
+</script>
     </div>
   </div>
 </section>

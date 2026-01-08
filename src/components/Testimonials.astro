@@ -1,41 +1,83 @@
 ---
 const reviews = [
   {
-    name: "Sarah Jenkins",
-    location: "United Kingdom",
-    text: "An unforgettable stay. The views of Sigiriya were mesmerizing, and the staff treated us like royalty."
+    name: "Magha Jayawimana",
+    country: "Sri Lanka",
+    rating: 5,
+    text: "Lovely comfortable location, friendly staff delicious food and easy access to Sigirya, Minnariya national park. Perfect for a get away."
   },
   {
-    name: "David & Michelle",
-    location: "Australia",
-    text: "The perfect blend of luxury and nature. Waking up to the sounds of the jungle was a highlight of our trip."
+    name: "georgegg77",
+    country: "Bath, United Kingdom",
+    rating: 5,
+    text: "Stayed here for two nights, the hotel owner is lovely and very helpful. Uk plug adaptors were provided in our room which was a nice surprise as they haven’t been in other hotels! The complimentary breakfast was the best we’ve had in Sri Lanka, and the wifi is very good which is a bonus!"
   },
   {
-    name: "Hiroshi田中",
-    location: "Japan",
-    text: "Excellent food and beautiful rooms. Highly recommended for anyone visiting the Cultural Triangle."
+    name: "chinthy2006",
+    country: "Sri Lanka",
+    rating: 4,
+    text: "We have been there for one night on past year. It was good hospitality by the staff. If you can add more facilities that will be an advantage for more guest attraction. Thank you for all. We will visit your place again on this year."
+  },
+  {
+    name: "Rob",
+    country: "Oudewater, Netherlands",
+    rating: 4,
+    text: "Though it has only 4 rooms its location close to Sigirya and national park Minnerya makes it a good place to stay. Staff knows good driver for safaritrip to see elephants at end of day, its a must. Sri Lankan and western breakfast possible."
   }
 ];
 ---
 
 <section id="testimonials" class="py-24 bg-rio-black text-white relative overflow-hidden">
-  <div class="container mx-auto px-6 text-center z-10 relative">
+  <div class="container mx-auto px-6 text-center z-10 relative mb-12">
     <p class="text-rio-red font-sans uppercase tracking-[0.2em] text-sm mb-6">Guest Stories</p>
-    <h2 class="text-3xl md:text-5xl font-serif mb-16 italic">"Moments that last a lifetime"</h2>
+    <h2 class="text-3xl md:text-5xl font-serif italic">"Moments that last a lifetime"</h2>
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-        {reviews.map((review) => (
-            <div class="bg-white/5 p-8 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition duration-500">
-                <div class="text-rio-red text-4xl font-serif mb-6 leading-none">“</div>
-                <p class="font-sans font-light text-gray-300 leading-relaxed mb-8 min-h-[80px]">
-                    {review.text}
-                </p>
-                <div>
-                    <h4 class="font-serif text-lg tracking-wide">{review.name}</h4>
-                    <span class="text-xs uppercase tracking-widest text-gray-500">{review.location}</span>
-                </div>
-            </div>
-        ))}
-    </div>
+  <!-- Marquee Container -->
+  <div class="relative w-full overflow-hidden group">
+      <!-- Gradient masks for smooth fade edges -->
+      <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-rio-black to-transparent z-20 pointer-events-none"></div>
+      <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-rio-black to-transparent z-20 pointer-events-none"></div>
+
+      <!-- Scrolling Track -->
+      <div class="flex animate-marquee hover:pause gap-8 w-max px-4">
+          <!-- Duplicate set for seamless infinite scroll -->
+          {[...reviews, ...reviews].map((review) => (
+              <div class="w-[350px] md:w-[450px] flex-none bg-white/5 p-8 border border-white/10 backdrop-blur-sm rounded-lg hover:bg-white/10 transition duration-500 flex flex-col items-center text-center">
+                  <!-- Star Rating -->
+                  <div class="flex gap-1 text-yellow-400 mb-6">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                          <svg xmlns="http://www.w3.org/2000/svg" class={`h-5 w-5 ${i < review.rating ? 'fill-current' : 'text-gray-600'}`} viewBox="0 0 20 20" fill="currentColor">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                      ))}
+                  </div>
+                  
+                  <p class="font-sans font-light text-gray-300 leading-relaxed mb-8 flex-grow italic">
+                      "{review.text}"
+                  </p>
+                  
+                  <div class="mt-auto">
+                      <h4 class="font-serif text-lg tracking-wide text-white">{review.name}</h4>
+                      <span class="text-xs uppercase tracking-widest text-rio-gray/70 block mt-1">{review.country}</span>
+                  </div>
+              </div>
+          ))}
+      </div>
   </div>
 </section>
+
+<style>
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    
+    .animate-marquee {
+        animation: marquee 40s linear infinite;
+    }
+    
+    .pause {
+        animation-play-state: paused;
+    }
+</style>

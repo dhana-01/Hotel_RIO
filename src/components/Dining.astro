@@ -3,12 +3,44 @@
 <section id="dining" class="py-20 bg-rio-white">
   <div class="container mx-auto px-6">
     <div class="flex flex-col md:flex-row items-center gap-12">
-        <div class="w-full md:w-1/2 order-2 md:order-1">
-            <div class="aspect-square bg-gray-200 relative overflow-hidden">
-                 <img src="/images/hero-bg.jpg" alt="Dining" class="object-cover w-full h-full" />
-                 <div class="absolute inset-0 bg-black/10"></div>
+        <div class="w-[600px] h-[600px] flex-none order-2 md:order-1 relative group overflow-hidden rounded-lg shadow-2xl">
+            <!-- Image Stack (4 Images total) -->
+            <div class="dining-stack absolute bottom-0 left-0 w-full h-[400%] flex flex-col">
+                 <!-- Image 4 (Appears last) -->
+                 <img src="/images/food.jpg" alt="Dining Experience 4" class="object-cover w-[600px] h-[600px]" />
+                 <!-- Image 3 -->
+                 <img src="/images/food3.jpg" alt="Dining Experience 3" class="object-cover w-[600px] h-[600px]" />
+                 <!-- Image 2 -->
+                 <img src="/images/food2.jpg" alt="Dining Experience 2" class="object-cover w-[600px] h-[600px]" />
+                 <!-- Image 1 (Default - Visible Initially) -->
+                 <img src="/images/food.jpg" alt="Delicious Local Cuisine" class="object-cover w-[600px] h-[600px]" />
             </div>
+            
+            <!-- Overlay/Text for context -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
         </div>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const stack = document.querySelector('.dining-stack');
+
+    if (stack) {
+        gsap.to(stack, {
+            yPercent: 85, // Move down by 95% of its height (revealing top images)
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#dining",
+                start: "top bottom", // Start when top of section hits bottom of viewport
+                end: "bottom top ",   // End when bottom of section hits top of viewport
+                scrub: 4         // Smooth scrubbing linked to scroll
+            }
+        });
+    }
+</script>
         <div class="w-full md:w-1/2 order-1 md:order-2 text-center md:text-left">
             <p class="text-rio-red font-sans uppercase tracking-[0.2em] text-sm mb-4">Culinary Delights</p>
             <h2 class="text-4xl md:text-5xl font-serif text-rio-black mb-6">Authentic Flavors</h2>
