@@ -2,21 +2,30 @@
 
 A luxury hotel website built with **Astro 5**, **Tailwind CSS**, and **GSAP**, featuring a premium design inspired by the rich heritage of Sri Lanka's Cultural Triangle.
 
+![Hotel Rio Banner](/public/images/room1.png)
+
 ## 🌟 Features
 
 *   **Modern Tech Stack**: Built on Astro 5.x for lightning-fast performance (Static Site Generation).
 *   **Premium Design**: Custom "Hotel Rio" design system using Tailwind CSS v4 with a 60/30/10 color rule.
-*   **Immersive Animations**: Smooth scroll-triggered animations and parallax effects powered by GSAP.
-*   **Glassmorphic UI**: Interactive booking bar with date, room type, and guest selectors.
-*   **Video Hero Section**: Full-screen cinematic background video.
+*   **Advanced Animations**:
+    *   **Hero**: Full-screen video with glassmorphic overlay.
+    *   **About**: Custom "Line Wipe" slideshow revealing images from right to left.
+    *   **Dining**: Scroll-driven vertical stack animation using GSAP ScrollTrigger.
+    *   **Testimonials**: Infinite marquee scroll with auto-pause on hover.
+    *   **Navigation**: Transparent-to-dark scroll effect with animated link underlines.
+*   **New Pages**: Dedicated **Contact Page** with inquiry form and stylized info section.
+*   **Visual Polish**:
+    *   **Section Dividers**: Smooth SVG wave transitions between sections (Dining → Location → Testimonials).
+    *   **Footer**: Animated social media icons with glow effects.
+*   **Glassmorphic UI**: Interactive booking bar and testimonial cards.
 *   **Responsive**: Fully optimized for mobile, tablet, and desktop devices.
-*   **Accessible Components**: Semantic HTML and keyboard-navigable UI elements.
 
 ## 🛠️ Technology Stack
 
 *   **Framework**: [Astro 5.x](https://astro.build)
 *   **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
-*   **Animations**: [GSAP](https://greensock.com/gsap/)
+*   **Animations**: [GSAP](https://greensock.com/gsap/) & [GSAP ScrollTrigger](https://greensock.com/scrolltrigger)
 *   **Icons**: Heroicons (Inline SVGs)
 *   **Maps**: Google Maps Embed
 
@@ -25,27 +34,26 @@ A luxury hotel website built with **Astro 5**, **Tailwind CSS**, and **GSAP**, f
 ```text
 /
 ├── public/
-│   ├── images/          # Image assets (rooms, backgrounds)
+│   ├── images/          # Image assets (rooms, backgrounds, dining, about slides)
 │   └── videos/          # Video assets (hero background)
 ├── src/
 │   ├── components/      # Reusable UI components
-│   │   ├── Header.astro
-│   │   ├── Hero.astro
-│   │   ├── BookingBar.astro
-│   │   ├── About.astro
-│   │   ├── Rooms.astro
-│   │   ├── Dining.astro
-│   │   ├── Location.astro
-│   │   ├── Testimonials.astro
-│   │   └── Footer.astro
+│   │   ├── Header.astro           # Nav & Logo
+│   │   ├── Hero.astro             # Video Hero & Booking Bar
+│   │   ├── About.astro            # Slideshow Animation
+│   │   ├── Rooms.astro            # Room Cards
+│   │   ├── Dining.astro           # Scroll Animation
+│   │   ├── Location.astro         # Map & Attractions
+│   │   ├── SectionDivider.astro   # Wave Dividers
+│   │   ├── Testimonials.astro     # Marquee Reviews
+│   │   └── Footer.astro           # Socials & Links
 │   ├── layouts/
 │   │   └── Layout.astro # Main page layout
 │   ├── pages/
-│   │   └── index.astro  # Homepage
+│   │   ├── index.astro  # Homepage
+│   │   └── contact.astro # Contact Page
 │   ├── styles/
 │   │   └── global.css   # Global Tailwind/CSS styles
-│   └── scripts/
-│       └── animations.js # GSAP animation logic
 └── package.json
 ```
 
