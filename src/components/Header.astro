@@ -1,13 +1,10 @@
 ---
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#rooms", label: "Rooms" },
-  { href: "#dining", label: "Dining" },
-  { href: "#location", label: "Location" },
-];
+const { theme = 'light' } = Astro.props;
+const textColorClass = theme === 'dark' ? 'text-rio-black' : 'text-white';
+const mobileMenuColorClass = theme === 'dark' ? 'text-rio-black' : 'text-white';
 ---
 
-<header class="fixed w-full z-50 transition-all duration-500 bg-transparent" id="main-header">
+<header class="fixed w-full z-50 transition-all duration-500 bg-transparent" id="main-header" data-theme={theme}>
   <div class="container mx-auto px-6 py-6 flex justify-between items-center transition-all duration-500" id="header-container">
     
     <!-- Logo (Left) -->
@@ -19,23 +16,23 @@ const links = [
     <div class="flex items-center space-x-10">
       <nav class="hidden md:flex space-x-10">
         <!-- Reordered Links: About, Rooms, Location, Dining -->
-        <a href="#about" class="group relative text-white hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md">
+        <a href="#about" class={`nav-link group relative ${textColorClass} hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md`}>
           About
           <span class="absolute bottom-0 left-0 w-full h-0.5 bg-rio-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
         </a>
-        <a href="#rooms" class="group relative text-white hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md">
+        <a href="#rooms" class={`nav-link group relative ${textColorClass} hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md`}>
           Rooms
           <span class="absolute bottom-0 left-0 w-full h-0.5 bg-rio-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
         </a>
-        <a href="#location" class="group relative text-white hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md">
+        <a href="#location" class={`nav-link group relative ${textColorClass} hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md`}>
           Location
           <span class="absolute bottom-0 left-0 w-full h-0.5 bg-rio-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
         </a>
-        <a href="#dining" class="group relative text-white hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md">
+        <a href="#dining" class={`nav-link group relative ${textColorClass} hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md`}>
           Dining
           <span class="absolute bottom-0 left-0 w-full h-0.5 bg-rio-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
         </a>
-        <a href="/contact" class="group relative text-white hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md">
+        <a href="/contact" class={`nav-link group relative ${textColorClass} hover:text-rio-red transition font-sans text-sm tracking-[0.2em] uppercase py-2 font-medium drop-shadow-md`}>
           Contact
           <span class="absolute bottom-0 left-0 w-full h-0.5 bg-rio-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
         </a>
@@ -46,7 +43,7 @@ const links = [
       </a>
       
       <!-- Mobile Menu Button -->
-      <button class="md:hidden text-white focus:outline-none drop-shadow-md" aria-label="Open Menu">
+      <button class={`md:hidden ${mobileMenuColorClass} focus:outline-none drop-shadow-md`} aria-label="Open Menu" id="mobile-menu-btn">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
@@ -59,11 +56,39 @@ const links = [
   const header = document.getElementById("main-header");
   const container = document.getElementById("header-container");
   const logo = document.getElementById("header-logo");
+  const navLinks = document.querySelectorAll(".nav-link");
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   
+  const initialTheme = header?.dataset.theme || 'light';
+
+  const updateColors = (isSticky) => {
+      // If sticky, always white text (on dark bg). 
+      // If not sticky, use initial theme color.
+      const targetColorClass = isSticky ? 'text-white' : (initialTheme === 'dark' ? 'text-rio-black' : 'text-white');
+      const textToRemove = targetColorClass === 'text-white' ? 'text-rio-black' : 'text-white';
+
+      navLinks.forEach(link => {
+          link.classList.remove(textToRemove);
+          link.classList.add(targetColorClass);
+      });
+
+      if (mobileMenuBtn) {
+          mobileMenuBtn.classList.remove(textToRemove);
+          mobileMenuBtn.classList.add(targetColorClass);
+      }
+  };
+
   if (header && container && logo) {
       window.addEventListener("scroll", () => {
-        // Trigger after scrolling past 90% of the viewport height (Hero section)
-        if (window.scrollY > window.innerHeight * 0.9) {
+        // Trigger after scrolling past 90px (not full viewport, earlier usually better for sticky)
+        // Or keep original logic if user prefers full hero scroll? 
+        // Original was window.innerHeight * 0.9.
+        // For Contact page (no hero), this threshold might be too large. 
+        // Let's use a smaller threshold if theme is dark (since no hero).
+        
+        const threshold = initialTheme === 'dark' ? 100 : window.innerHeight * 0.9;
+
+        if (window.scrollY > threshold) {
           header.classList.remove("bg-transparent");
           header.classList.add("bg-rio-black/95", "backdrop-blur-md", "shadow-xl");
           
@@ -71,6 +96,8 @@ const links = [
           container.classList.add("py-3"); // Shrink container
           
           logo.classList.replace("h-20", "h-14"); // Shrink logo
+          
+          updateColors(true); // Sticky -> White text
         } else {
           header.classList.add("bg-transparent");
           header.classList.remove("bg-rio-black/95", "backdrop-blur-md", "shadow-xl");
@@ -79,6 +106,8 @@ const links = [
           container.classList.remove("py-3");
           
           logo.classList.replace("h-14", "h-20");
+          
+          updateColors(false); // Not sticky -> Initial theme text
         }
       });
   }
