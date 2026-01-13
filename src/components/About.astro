@@ -8,20 +8,20 @@ import { Image } from 'astro:assets';
     <div class="flex flex-col md:flex-row items-center gap-16">
       <!-- Text Content -->
       <div class="w-full md:w-1/2">
-        <p class="text-rio-red font-sans uppercase tracking-[0.2em] text-sm mb-6">Discovery</p>
-        <h2 class="text-4xl md:text-5xl font-serif text-rio-black mb-8 leading-tight">
+        <p class="about-reveal text-rio-red font-sans uppercase tracking-[0.2em] text-sm mb-6">Discovery</p>
+        <h2 class="about-reveal text-4xl md:text-5xl font-serif text-rio-black mb-8 leading-tight">
           Beyond the hotel,<br/>
           <span class="italic text-gray-500">Nature awaits</span>
         </h2>
-        <p class="text-gray-600 font-sans leading-relaxed mb-6 font-light">
+        <p class="about-reveal text-gray-600 font-sans leading-relaxed mb-6 font-light">
           Nestled in the heart of the Cultural Triangle, Hotel Rio offers unobstructed views of Sigiriya and Pidurangala. 
           Step into a world where modern luxury meets the authentic hospitality of Sri Lanka.
         </p>
-        <p class="text-gray-600 font-sans leading-relaxed mb-10 font-light">
+        <p class="about-reveal text-gray-600 font-sans leading-relaxed mb-10 font-light">
            We bring you the essence of Sri Lanka through unique experiences, delicious food, and a deep connection to the wildlife that surrounds us.
         </p>
         
-        <a href="#location" class="group inline-flex items-center text-rio-black uppercase tracking-widest text-sm hover:text-rio-red transition-colors">
+        <a href="#location" class="about-reveal group inline-flex items-center text-rio-black uppercase tracking-widest text-sm hover:text-rio-red transition-colors">
           Explore the location
           <span class="ml-2 transform group-hover:translate-x-2 transition-transform duration-300">→</span>
         </a>
@@ -50,19 +50,36 @@ import { Image } from 'astro:assets';
 
 <script>
   import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
   
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Scroll Reveal Animations for Text
+  const aboutRevealElements = document.querySelectorAll('.about-reveal');
+  
+  aboutRevealElements.forEach((element, index) => {
+    gsap.from(element, {
+      scrollTrigger: {
+        trigger: element,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      delay: index * 0.15,
+      ease: "power2.out"
+    });
+  });
+
+  // Image Slideshow Animation
   const images = document.querySelectorAll('.slide-img');
   const wipeLine = document.getElementById('wipe-line');
   let currentIndex = 0;
   const slideInterval = 2000; // 2 seconds
-
-  // Initialize: Set all images hidden/back except first
-  // Actually, standard CSS stacking (last in DOM is top) or z-index?
-  // Let's control via z-index in GSAP
   
   if (images.length > 0 && wipeLine) {
-      // Ensure z-indices are correct
-      gsap.set(images, { zIndex: 0, opacity: 1 }); // specific opacity logic if needed, but we rely on z-index + clip
+      gsap.set(images, { zIndex: 0, opacity: 1 });
       gsap.set(images[0], { zIndex: 10 });
 
       const cycleImages = () => {
@@ -70,24 +87,17 @@ import { Image } from 'astro:assets';
           const currentImg = images[currentIndex];
           const nextImg = images[nextIndex];
 
-          // Bring next image to just below current (or above?)
-          // For a wipe REVEAL from RIGHT, we start fully clipped from the LEFT
           gsap.set(nextImg, { zIndex: 20, clipPath: "inset(0 0 0 100%)" });
           
-          // Animate Line and Clip Path
           const tl = gsap.timeline({
             onComplete: () => {
-                // Reset states
                 gsap.set(currentImg, { zIndex: 0 });
-                gsap.set(nextImg, { zIndex: 10 }); // Stays as current
+                gsap.set(nextImg, { zIndex: 10 });
                 currentIndex = nextIndex;
             }
           });
 
-          // Show line at Right side
           tl.set(wipeLine, { opacity: 1, left: "100%" })
-            
-            // Simultaneous wipe: Line moves R->L, Next Image unmasks R->L
             .to(wipeLine, { 
                 left: "0%", 
                 duration: 1, 
@@ -98,17 +108,12 @@ import { Image } from 'astro:assets';
                 duration: 1, 
                 ease: "power2.inOut" 
             }, 0)
-            
-            // Hide line
             .set(wipeLine, { opacity: 0 });
-
       };
 
-      // Start loop
       setInterval(() => {
-          // Check if tab is active logic could be added, but simple interval is fine
           cycleImages();
-      }, slideInterval + 1000); // Wait for animation (1s) + interval
+      }, slideInterval + 1000);
   }
 </script>
     </div>

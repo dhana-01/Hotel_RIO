@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About Us | Hotel Rio" headerTheme="light">
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center bg-rio-black text-white overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img src="/images/about1.jpg" alt="Hotel Rio" class="w-full h-full object-cover opacity-40" />
+      <div class="absolute inset-0 bg-gradient-to-b from-rio-black/70 via-rio-black/50 to-rio-black"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container mx-auto px-6 relative z-10 pt-32 pb-20">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="hero-reveal text-rio-red font-sans uppercase tracking-[0.3em] text-xs md:text-sm mb-6">Our Story</p>
+        <h1 class="hero-reveal text-5xl md:text-7xl font-serif text-white mb-12 leading-tight">
+          A Tropical City<br/>Experience
+        </h1>
+        
+        <div class="space-y-6 text-lg md:text-xl leading-relaxed text-gray-300 font-light">
+          <p class="hero-reveal">
+            Hotel Rio was born from a desire to showcase the authentic beauty of Sri Lanka's Cultural Triangle. 
+            Nestled within lush greenery, our architecture pays homage to the ancient traditions of the region 
+            while maintaining contemporary elegance.
+          </p>
+          <p class="hero-reveal">
+            We believe in "unobstructed views," not just of the majestic Sigiriya Rock and Pidurangala, 
+            but of the culture itself. Every corner of Rio tells a story—from the locally sourced timber 
+            to the curated art that adorns our walls.
+          </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="hero-reveal mt-16 animate-bounce">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto text-rio-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unique Experiences Section -->
+  <section class="relative py-24 md:py-32 bg-gradient-to-b from-rio-white to-gray-50 overflow-hidden">
+    <div class="container mx-auto px-6">
+      <!-- Section Header -->
+      <div class="text-center mb-20">
+        <h2 class="section-reveal text-4xl md:text-5xl font-serif text-rio-red mb-6">Unique Experiences</h2>
+      </div>
+
+      <!-- Experiences Grid -->
+      <div class="experiences-grid grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Experience Card 1: Nature Walks -->
+        <div class="experience-card group relative bg-white rounded-2xl p-10 shadow-md hover:shadow-2xl transition-all duration-500 text-center">
+          <div class="mb-6 flex justify-center">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-2xl font-serif text-rio-black mb-4 group-hover:text-rio-red transition-colors duration-300">Nature Walks</h3>
+          <p class="text-gray-600 font-sans leading-relaxed text-sm">Guided tours through our private nature trails to spot endemic birds and wildlife.</p>
+        </div>
+
+        <!-- Experience Card 2: Culinary Journeys -->
+        <div class="experience-card group relative bg-white rounded-2xl p-10 shadow-md hover:shadow-2xl transition-all duration-500 text-center">
+          <div class="mb-6 flex justify-center">
+            <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-2xl font-serif text-rio-black mb-4 group-hover:text-rio-red transition-colors duration-300">Culinary Journeys</h3>
+          <p class="text-gray-600 font-sans leading-relaxed text-sm">Learn to cook traditional Sri Lankan curry with our head chef using garden-fresh spices.</p>
+        </div>
+
+        <!-- Experience Card 3: Wellness & Yoga -->
+        <div class="experience-card group relative bg-white rounded-2xl p-10 shadow-md hover:shadow-2xl transition-all duration-500 text-center">
+          <div class="mb-6 flex justify-center">
+            <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-2xl font-serif text-rio-black mb-4 group-hover:text-rio-red transition-colors duration-300">Wellness & Yoga</h3>
+          <p class="text-gray-600 font-sans leading-relaxed text-sm">Sunrise yoga sessions facing the Sigiriya rock fortress to rejuvenate your mind and soul.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero Section Animations
+  const heroElements = document.querySelectorAll('.hero-reveal');
+  
+  heroElements.forEach((element, index) => {
+    gsap.from(element, {
+      opacity: 0,
+      y: 40,
+      duration: 1,
+      delay: 0.3 + (index * 0.2),
+      ease: "power3.out"
+    });
+  });
+
+  // Section Header Animations
+  const sectionElements = document.querySelectorAll('.section-reveal');
+  
+  sectionElements.forEach((element, index) => {
+    gsap.from(element, {
+      scrollTrigger: {
+        trigger: element,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      delay: index * 0.15,
+      ease: "power2.out"
+    });
+  });
+
+  // Experience Cards Staggered Animation
+  const experienceCards = document.querySelectorAll('.experience-card');
+  const experienceGrid = document.querySelector('.experiences-grid');
+  
+  if (experienceGrid && experienceCards.length > 0) {
+    gsap.from(experienceCards, {
+      scrollTrigger: {
+        trigger: experienceGrid,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power3.out",
+      clearProps: "all" // Ensure cleanup after animation
+    });
+  }
+
+  // Icon Pulse Animation on Scroll
+  experienceCards.forEach((card) => {
+    const icon = card.querySelector('div > div');
+    
+    gsap.from(icon, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 75%",
+        toggleActions: "play none none none"
+      },
+      scale: 0,
+      rotation: -180,
+      duration: 0.6,
+      delay: 0.3,
+      ease: "back.out(1.7)"
+    });
+  });
+</script>
+
+<style>
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+</style>
