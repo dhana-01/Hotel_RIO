@@ -47,12 +47,25 @@ const mobileMenuColorClass = theme === 'dark' ? 'text-rio-black' : 'text-white';
       </a>
       
       <!-- Mobile Menu Button -->
-      <button class={`md:hidden ${mobileMenuColorClass} focus:outline-none drop-shadow-md`} aria-label="Open Menu" id="mobile-menu-btn">
+      <button class={`md:hidden ${mobileMenuColorClass} focus:outline-none drop-shadow-md z-50 relative`} aria-label="Open Menu" id="mobile-menu-btn">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
       </button>
     </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-rio-black/95 z-40 transform translate-x-full transition-transform duration-300 md:hidden flex items-center justify-center">
+    <nav class="flex flex-col items-center space-y-8">
+      <a href="/" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Home</a>
+      <a href="/about" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">About</a>
+      <a href="/#rooms" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Rooms</a>
+      <a href="/#location" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Location</a>
+      <a href="/#dining" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Dining</a>
+      <a href="/contact" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Contact</a>
+      <a href="/#book" class="px-8 py-3 bg-rio-red text-white font-sans text-sm tracking-widest uppercase shadow-lg">Book Now</a>
+    </nav>
   </div>
 </header>
 
@@ -62,8 +75,34 @@ const mobileMenuColorClass = theme === 'dark' ? 'text-rio-black' : 'text-white';
   const logo = document.getElementById("header-logo");
   const navLinks = document.querySelectorAll(".nav-link");
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
   
   const initialTheme = header?.dataset.theme || 'light';
+
+  // Toggle Mobile Menu
+  if (mobileMenuBtn && mobileMenuOverlay) {
+    mobileMenuBtn.addEventListener('click', () => {
+      const isClosed = mobileMenuOverlay.classList.contains('translate-x-full');
+      if (isClosed) {
+        mobileMenuOverlay.classList.remove('translate-x-full');
+        // Change icon to close (X)
+        mobileMenuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>`;
+      } else {
+        mobileMenuOverlay.classList.add('translate-x-full');
+        // Change icon back to hamburger
+        mobileMenuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>`;
+      }
+    });
+
+    // Close menu when a link is clicked
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuOverlay.classList.add('translate-x-full');
+        mobileMenuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>`;
+      });
+    });
+  }
 
   const updateColors = (isSticky) => {
       // If sticky, always white text (on dark bg). 
