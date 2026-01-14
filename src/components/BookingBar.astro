@@ -2,74 +2,160 @@
 ---
 
 <div class="w-full max-w-6xl mx-auto px-4 absolute bottom-0 left-1/2 transform -translate-x-1/2 z-30 pb-12">
-    <div class="bg-rio-black/30 backdrop-blur-xl border border-white/10 rounded-none md:rounded-lg p-0 md:p-6 text-white shadow-2xl">
-        <form class="grid grid-cols-1 md:grid-cols-4 gap-0 md:gap-4 divide-y md:divide-y-0 divide-white/10 md:divide-x">
-            
-            <!-- Date Picker -->
-            <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0" id="date-selector">
-                <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Date</label>
-                <div class="flex items-center justify-between">
-                    <span class="text-sm md:text-base font-serif" id="selected-date">Add date</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
-                
-                <!-- Custom Glassmorphic Date Popup -->
-                <div class="absolute bottom-full left-0 mb-4 w-72 bg-rio-black/80 backdrop-blur-xl border border-white/10 p-4 rounded-lg shadow-xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-2 group-focus-within:translate-y-0 z-50">
-                    <div class="text-center mb-4 font-serif">Select Details</div>
-                    <!-- Simplified visual representation of calendar for UI demo -->
-                    <input type="date" class="bg-white/10 border border-white/20 text-white rounded p-2 w-full outline-none focus:border-rio-red" onchange="document.getElementById('selected-date').innerText = this.value || 'Add date'">
-                </div>
-            </div>
+    <div class="bg-rio-black/30 backdrop-blur-xl border border-white/10 rounded-lg p-0 md:p-6 text-white shadow-2xl transition-all duration-500 ease-in-out" id="booking-container">
+        
+        <!-- Mobile Toggle Button -->
+        <button id="mobile-booking-toggle" class="md:hidden w-full py-4 px-6 flex items-center justify-between text-white font-serif uppercase tracking-widest text-sm hover:bg-white/10 transition-colors bg-rio-black/40 backdrop-blur-md">
+            <span>Book Your Stay</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-300" id="booking-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
 
-            <!-- Type Selector -->
-            <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0">
-                <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Type</label>
-                <div class="flex items-center justify-between">
-                    <span class="text-sm md:text-base font-serif" id="selected-type">Apartment</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
-                <!-- Dropdown -->
-                <div class="absolute bottom-full left-0 mb-4 w-full bg-rio-black/80 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-2 group-focus-within:translate-y-0 z-50 overflow-hidden">
-                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-type').innerText = 'Apartment'">Apartment</button>
-                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-type').innerText = 'Deluxe Room'">Deluxe Room</button>
-                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-type').innerText = 'Villa'">Villa</button>
-                </div>
-            </div>
+        <!-- Form Container -->
+        <!-- We use a wrapper for smooth height animation -->
+        <div id="booking-form-wrapper" class="grid grid-rows-[0fr] md:grid-rows-[1fr] transition-all duration-500 ease-in-out">
+            <div class="overflow-hidden md:overflow-visible min-h-0">
+                <form id="booking-form" class="grid grid-cols-1 md:grid-cols-5 gap-0 md:gap-4 divide-y md:divide-y-0 divide-white/10 md:divide-x border-t border-white/10 md:border-t-0 bg-rio-black/40 md:bg-transparent transition-opacity duration-300 md:opacity-100">
+                    
+                    <!-- Check In Date -->
+                    <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0">
+                        <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Check In</label>
+                        <div class="flex items-center justify-between">
+                             <input type="text" id="check-in-date" placeholder="Add date" class="bg-transparent border-none text-white font-serif text-sm md:text-base placeholder-white/70 focus:outline-none w-full cursor-pointer flatpickr-input" readonly="readonly">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
 
-            <!-- Guests Selector -->
-            <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0">
-                <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Guests</label>
-                <div class="flex items-center justify-between">
-                    <span class="text-sm md:text-base font-serif" id="selected-guests">Number of guests</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
-                 <!-- Dropdown -->
-                 <div class="absolute bottom-full left-0 mb-4 w-full bg-rio-black/80 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-2 group-focus-within:translate-y-0 z-50 overflow-hidden">
-                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-guests').innerText = '1 Guest'">1 Guest</button>
-                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-guests').innerText = '2 Guests'">2 Guests</button>
-                    <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm" onclick="document.getElementById('selected-guests').innerText = 'Family'">Family</button>
-                </div>
-            </div>
+                    <!-- Check Out Date -->
+                    <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0">
+                         <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Check Out</label>
+                        <div class="flex items-center justify-between">
+                            <input type="text" id="check-out-date" placeholder="Add date" class="bg-transparent border-none text-white font-serif text-sm md:text-base placeholder-white/70 focus:outline-none w-full cursor-pointer flatpickr-input" readonly="readonly">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
 
-            <!-- Booking Button -->
-            <div class="flex items-center justify-center p-4 md:p-2">
-                <a href="#book" class="group flex items-center gap-2 text-sm uppercase tracking-widest hover:text-rio-red transition-colors">
-                    Booking
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m16 8h-2" />
-                    </svg>
-                </a>
+                    <!-- Type Selector -->
+                    <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0">
+                        <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Type</label>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm md:text-base font-serif" id="selected-type">Apartment</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <!-- Dropdown -->
+                        <div class="absolute bottom-full left-0 mb-4 w-full bg-rio-black/90 backdrop-blur-2xl border border-white/20 rounded-lg shadow-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-4 group-focus-within:translate-y-0 z-50 overflow-hidden">
+                            <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm border-b border-white/5 last:border-0" onclick="document.getElementById('selected-type').innerText = 'Apartment'">Apartment</button>
+                            <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm border-b border-white/5 last:border-0" onclick="document.getElementById('selected-type').innerText = 'Deluxe Room'">Deluxe Room</button>
+                            <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm border-b border-white/5 last:border-0" onclick="document.getElementById('selected-type').innerText = 'Villa'">Villa</button>
+                        </div>
+                    </div>
+
+                    <!-- Guests Selector -->
+                    <div class="relative group p-4 md:p-2 cursor-pointer" tabindex="0">
+                        <label class="block text-xs uppercase tracking-widest text-rio-gray mb-1">Guests</label>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm md:text-base font-serif" id="selected-guests">Number of guests</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                         <!-- Dropdown -->
+                         <div class="absolute bottom-full left-0 mb-4 w-full bg-rio-black/90 backdrop-blur-2xl border border-white/20 rounded-lg shadow-2xl opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 transform translate-y-4 group-focus-within:translate-y-0 z-50 overflow-hidden">
+                            <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm border-b border-white/5 last:border-0" onclick="document.getElementById('selected-guests').innerText = '1 Guest'">1 Guest</button>
+                            <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm border-b border-white/5 last:border-0" onclick="document.getElementById('selected-guests').innerText = '2 Guests'">2 Guests</button>
+                            <button type="button" class="block w-full text-left px-4 py-3 hover:bg-white/10 transition-colors text-sm border-b border-white/5 last:border-0" onclick="document.getElementById('selected-guests').innerText = 'Family'">Family</button>
+                        </div>
+                    </div>
+
+                    <!-- Booking Button -->
+                    <div class="flex items-center justify-center p-4 md:p-2">
+                        <a href="#book" class="group flex items-center gap-2 text-sm uppercase tracking-widest hover:text-rio-red transition-colors font-medium">
+                            Check Availability
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m16 8h-2" />
+                            </svg>
+                        </a>
+                    </div>
+                </form>
             </div>
-            
-        </form>
+        </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    // Initialize Toggle Logic
+    const toggleBtn = document.getElementById('mobile-booking-toggle');
+    const bookingFormWrapper = document.getElementById('booking-form-wrapper');
+    const bookingFormInner = bookingFormWrapper?.querySelector('div'); // The overflow container
+    const chevron = document.getElementById('booking-chevron');
+
+    if (toggleBtn && bookingFormWrapper && chevron && bookingFormInner) {
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            const isExpanded = bookingFormWrapper.classList.contains('grid-rows-[1fr]');
+            
+            if (isExpanded) {
+                // Collapse
+                bookingFormWrapper.classList.remove('grid-rows-[1fr]');
+                bookingFormWrapper.classList.add('grid-rows-[0fr]');
+                
+                // Reset overflow to hidden immediately
+                bookingFormInner.classList.remove('overflow-visible');
+                bookingFormInner.classList.add('overflow-hidden');
+                
+                chevron.classList.remove('rotate-180');
+                toggleBtn.classList.remove('bg-rio-black/60');
+            } else {
+                // Expand
+                bookingFormWrapper.classList.remove('grid-rows-[0fr]');
+                bookingFormWrapper.classList.add('grid-rows-[1fr]');
+                
+                chevron.classList.add('rotate-180');
+                toggleBtn.classList.add('bg-rio-black/60');
+                
+                // Wait for animation to finish then allow overflow (so popups work)
+                setTimeout(() => {
+                    if (bookingFormWrapper.classList.contains('grid-rows-[1fr]')) {
+                        bookingFormInner.classList.remove('overflow-hidden');
+                        bookingFormInner.classList.add('overflow-visible');
+                    }
+                }, 500); // Matches duration-500
+            }
+        });
+    }
+
+    // Initialize Flatpickr for Glassmorphic Calendar
+    document.addEventListener('DOMContentLoaded', () => {
+        // @ts-ignore
+        flatpickr("#check-in-date", {
+            dateFormat: "F j, Y",
+            minDate: "today",
+            theme: "dark", // We will override this
+            disableMobile: "true", // Force custom calendar on mobile for better styling
+            onChange: function(selectedDates, dateStr, instance) {
+                // Optional: Auto open check-out
+            }
+        });
+
+        // @ts-ignore
+        flatpickr("#check-out-date", {
+            dateFormat: "F j, Y",
+            minDate: "today",
+             disableMobile: "true"
+        });
+    });
+</script>
 
 <style>
     /* Hide native date picker icon if desired, or style it */
@@ -77,5 +163,81 @@
         filter: invert(1);
         opacity: 0.6;
         cursor: pointer;
+    }
+</style>
+
+<style is:global>
+    /* Custom Glassmorphic Theme for Flatpickr */
+    .flatpickr-calendar {
+        background: rgba(20, 20, 20, 0.9) !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+        border-radius: 12px !important;
+        color: white !important;
+        font-family: 'DM Sans', sans-serif !important;
+    }
+
+    .flatpickr-months .flatpickr-month {
+        background: transparent !important;
+        color: white !important;
+    }
+
+    .flatpickr-current-month .flatpickr-monthDropdown-months,
+    .flatpickr-current-month input.cur-year {
+        color: white !important;
+        font-weight: 700 !important;
+    }
+
+    .flatpickr-current-month .flatpickr-monthDropdown-months:hover {
+        background: transparent !important;
+    }
+
+    .flatpickr-weekdays {
+        background: transparent !important;
+    }
+
+    .flatpickr-weekday {
+        color: rgba(255, 255, 255, 0.5) !important;
+        font-weight: bold !important;
+        font-size: 0.9rem !important;
+    }
+
+    .flatpickr-day {
+        color: white !important;
+        border-radius: 8px !important;
+    }
+
+    .flatpickr-day:hover, 
+    .flatpickr-day.prevMonthDay:hover, 
+    .flatpickr-day.nextMonthDay:hover, 
+    .flatpickr-day:focus {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-color: transparent !important;
+    }
+
+    .flatpickr-day.selected, 
+    .flatpickr-day.startRange, 
+    .flatpickr-day.endRange, 
+    .flatpickr-day.selected.inRange, 
+    .flatpickr-day.startRange.inRange, 
+    .flatpickr-day.endRange.inRange, 
+    .flatpickr-day.selected:focus, 
+    .flatpickr-day.startRange:focus, 
+    .flatpickr-day.endRange:focus, 
+    .flatpickr-day.selected:hover, 
+    .flatpickr-day.startRange:hover, 
+    .flatpickr-day.endRange:hover {
+        background: #C41E3A !important; /* Rio Red */
+        border-color: #C41E3A !important;
+        color: white !important;
+    }
+    
+    .flatpickr-calendar.arrowTop:before, .flatpickr-calendar.arrowTop:after {
+        border-bottom-color: rgba(20, 20, 20, 0.9) !important;
+    }
+    
+    .flatpickr-calendar.arrowBottom:before, .flatpickr-calendar.arrowBottom:after {
+        border-top-color: rgba(20, 20, 20, 0.9) !important;
     }
 </style>

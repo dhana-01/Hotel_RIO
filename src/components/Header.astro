@@ -54,20 +54,20 @@ const mobileMenuColorClass = theme === 'dark' ? 'text-rio-black' : 'text-white';
       </button>
     </div>
   </div>
-
-  <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu-overlay" class="fixed inset-0 bg-rio-black/95 z-40 transform translate-x-full transition-transform duration-300 md:hidden flex items-center justify-center">
-    <nav class="flex flex-col items-center space-y-8">
-      <a href="/" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Home</a>
-      <a href="/about" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">About</a>
-      <a href="/#rooms" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Rooms</a>
-      <a href="/#location" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Location</a>
-      <a href="/#dining" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Dining</a>
-      <a href="/contact" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Contact</a>
-      <a href="/#book" class="px-8 py-3 bg-rio-red text-white font-sans text-sm tracking-widest uppercase shadow-lg">Book Now</a>
-    </nav>
-  </div>
 </header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-rio-black/95 z-40 transform translate-x-full transition-transform duration-300 md:hidden flex items-center justify-center">
+  <nav class="flex flex-col items-center space-y-8">
+    <a href="/" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Home</a>
+    <a href="/about" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">About</a>
+    <a href="/#rooms" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Rooms</a>
+    <a href="/#location" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Location</a>
+    <a href="/#dining" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Dining</a>
+    <a href="/contact" class="mobile-nav-link text-3xl font-serif text-white hover:text-rio-red transition-colors">Contact</a>
+    <a href="/#book" class="px-8 py-3 bg-rio-red text-white font-sans text-sm tracking-widest uppercase shadow-lg">Book Now</a>
+  </nav>
+</div>
 
 <script>
   const header = document.getElementById("main-header");
