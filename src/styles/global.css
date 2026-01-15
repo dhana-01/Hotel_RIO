@@ -18,10 +18,25 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* Scale down the website on desktop to simulate 80% zoom */
+  @media (min-width: 1024px) {
+    html {
+      font-size: 80%;
+      /* 12.8px base size */
+    }
+  }
+
   body {
     @apply bg-rio-white text-rio-black font-sans antialiased;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif;
   }
 }
